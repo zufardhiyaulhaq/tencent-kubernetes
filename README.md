@@ -19,6 +19,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [tencentcloud_kubernetes_cluster.cluster](https://registry.terraform.io/providers/tencentcloudstack/tencentcloud/1.81.111/docs/resources/kubernetes_cluster) | resource |
+| [tencentcloud_kubernetes_node_pool.node_pool](https://registry.terraform.io/providers/tencentcloudstack/tencentcloud/1.81.111/docs/resources/kubernetes_node_pool) | resource |
 
 ## Inputs
 
@@ -35,6 +36,7 @@ No modules.
 | <a name="input_label_environment"></a> [label\_environment](#input\_label\_environment) | Enviroment label | `string` | n/a | yes |
 | <a name="input_label_team"></a> [label\_team](#input\_label\_team) | Team label | `string` | n/a | yes |
 | <a name="input_max_pod_per_node"></a> [max\_pod\_per\_node](#input\_max\_pod\_per\_node) | Cluster max pod per node number. | `number` | n/a | yes |
+| <a name="input_node_pools"></a> [node\_pools](#input\_node\_pools) | nodepool configuration. | <pre>map(object({<br>    enable_autoscaling       = bool<br>    max_capacity             = number<br>    min_capacity             = number<br>    desired_capacity         = number<br>    node_subnet_ids          = list(string)<br>    retry_policy             = string<br>    multi_zone_subnet_policy = string<br>    auto_scaling_config = map(object({<br>      instance_type              = string<br>      system_disk_type           = string<br>      system_disk_size           = number<br>      security_group_ids         = list(string)<br>      key_ids                    = list(string)<br>      internet_charge_type       = string<br>      internet_max_bandwidth_out = number<br>    }))<br>    taints = map(object({<br>      key    = string<br>      value  = string<br>      effect = string<br>    }))<br>    labels = map(string)<br>  }))</pre> | n/a | yes |
 | <a name="input_pod_ip_subnet_ids"></a> [pod\_ip\_subnet\_ids](#input\_pod\_ip\_subnet\_ids) | Cluster of Pods | `list(string)` | n/a | yes |
 | <a name="input_runtime_version"></a> [runtime\_version](#input\_runtime\_version) | Container runtime version. | `string` | `"1.6.9"` | no |
 | <a name="input_service_ip_cidr"></a> [service\_ip\_cidr](#input\_service\_ip\_cidr) | Cluster service ip range. | `string` | n/a | yes |

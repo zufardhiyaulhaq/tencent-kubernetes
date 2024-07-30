@@ -82,3 +82,56 @@ variable "ignore_cluster_cidr_conflict" {
   description = "Ignore cluster cidr conflict."
   default     = true
 }
+
+variable "node_pools" {
+  type = map(object({
+    enable_autoscaling       = bool
+    max_capacity             = number
+    min_capacity             = number
+    desired_capacity         = number
+    node_subnet_ids          = list(string)
+    retry_policy             = string
+    multi_zone_subnet_policy = string
+    auto_scaling_config = map(object({
+      instance_type      = string
+      system_disk_type   = string
+      system_disk_size   = number
+      security_group_ids = list(string)
+      key_ids            = list(string)
+    }))
+    taints = map(object({
+      key    = string
+      value  = string
+      effect = string
+    }))
+    labels = map(string)
+  }))
+
+  description = "nodepool configuration."
+}
+
+variable "enable_internet_access" {
+  type        = bool
+  description = "Enable internet access."
+  default     = false
+}
+
+variable "enable_intranet_access" {
+  type        = bool
+  description = "Enable intranet access."
+  default     = false
+}
+
+variable "cluster_intranet_access_load_balancer_subnet_id" {
+  type        = string
+  description = "Cluster private access subnet id."
+}
+
+variable "cluster_internet_access_additional_ingress_rules" {
+  type = map(object({
+    action     = string
+    protocol   = string
+    port       = string
+    cidr_block = string
+  }))
+}
