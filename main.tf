@@ -30,9 +30,7 @@ resource "tencentcloud_kubernetes_cluster" "cluster" {
       cluster_intranet,
       cluster_intranet_subnet_id,
       cluster_internet,
-      cluster_internet_security_group,
-      kube_config,         // computed
-      kube_config_intranet // computed
+      cluster_internet_security_group
     ]
   }
 }
@@ -76,6 +74,10 @@ resource "tencentcloud_kubernetes_node_pool" "node_pool" {
   subnet_ids               = each.value.node_subnet_ids
   retry_policy             = each.value.retry_policy
   multi_zone_subnet_policy = each.value.multi_zone_subnet_policy
+
+  delete_keep_instance = each.value.delete_keep_instance
+  deletion_protection  = each.value.deletion_protection
+  termination_policies = each.value.termination_policies
 
   dynamic "auto_scaling_config" {
     for_each = each.value.auto_scaling_config

@@ -105,6 +105,10 @@ variable "node_pools" {
       effect = string
     }))
     labels = map(string)
+
+    delete_keep_instance = optional(bool, false)
+    deletion_protection  = optional(bool, false)
+    termination_policies = optional(list(string), ["NEWEST_INSTANCE"])
   }))
 
   description = "nodepool configuration."
